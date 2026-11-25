@@ -1,59 +1,244 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Event Registration Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel-based web application for publishing events, accepting attendee registrations, and managing events and registrations through an admin dashboard.
 
-## About Laravel
+## Screenshots
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 1. Homepage
+![Homepage](screenshots/Homepage.png)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 2. Event Registration Form
+![Registration Form](screenshots/Event%20Registration%20Form.png)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 3. Registration Confirmation
+![Registration Confirmation](screenshots/Registration%20Confirmation.png)
 
-## Learning Laravel
+### 4. Admin Login
+![Admin Login](screenshots/Admin%20Login.png)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 5. Admin Dashboard
+![Admin Dashboard](screenshots/Admin%20Dashboard.png)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 6. Event Management
+![Event Management](screenshots/Event%20Management.png)
 
-## Laravel Sponsors
+### 7. Registration Management
+![Registration Management](screenshots/Registration%20Management.png)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Features
 
-### Premium Partners
+- Public listing of upcoming events.
+- Event registration using name and email.
+- Duplicate registration prevention per event.
+- Registration confirmation page.
+- Admin authentication with role-based access control.
+- Admin dashboard with basic statistics.
+- Create, edit and delete events.
+- View and filter attendee registrations.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Technologies Used
 
-## Contributing
+| Technology | Purpose |
+|---|---|
+| PHP 8.2+ | Backend programming |
+| Laravel | Backend framework |
+| MySQL / SQLite | Database |
+| HTML, CSS, JavaScript | Frontend |
+| Bootstrap | UI styling |
+| Blade | Template engine |
+| Composer | PHP dependency management |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Prerequisites
 
-## Code of Conduct
+Check whether PHP and Composer are installed before starting. The UI uses Bootstrap from a CDN and `public/css/app.css`, so Node.js and npm are not required for normal setup.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Software | Requirement |
+|---|---|
+| PHP | 8.2 or newer with `pdo_sqlite` enabled |
+| Composer | Version 2 |
+| Git | Recommended, or download the project as a ZIP |
 
-## Security Vulnerabilities
+If PHP or Composer is missing:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Windows: install PHP from `https://windows.php.net/download/` and Composer from `https://getcomposer.org/Composer-Setup.exe`.
+- macOS: run `brew install php composer` if Homebrew is installed.
+- Ubuntu/Debian: run `sudo apt install php-cli php-mbstring php-xml php-curl php-sqlite3 php-zip unzip curl`, then follow `https://getcomposer.org/download/`.
 
-## License
+Close and reopen the terminal after installing.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Verify installations:
+
+```bash
+php -v
+composer --version
+```
+
+## Installation and Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd <project-folder>
+```
+
+### 2. Install Dependencies
+
+```bash
+composer install
+```
+
+### 3. Configure Environment
+
+Create the `.env` file from `.env.example`.
+
+**Windows:**
+
+```powershell
+Copy-Item .env.example .env
+```
+
+**macOS / Linux:**
+
+```bash
+cp .env.example .env
+```
+
+Generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+### 4. Database Configuration
+
+SQLite is the default database and is already set in `.env.example`:
+
+```env
+DB_CONNECTION=sqlite
+```
+
+Create the SQLite database file if it does not exist.
+
+**Windows:**
+
+```powershell
+New-Item -ItemType File -Path "database\database.sqlite" -Force
+```
+
+**macOS / Linux:**
+
+```bash
+touch database/database.sqlite
+```
+
+To use MySQL instead, create a database:
+
+```sql
+CREATE DATABASE event_registration;
+```
+
+Then update `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=event_registration
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Run Migrations and Seeders
+
+```bash
+php artisan migrate --seed
+```
+
+This runs the event, admin, and test user seeders. To reset local sample data later, use `php artisan migrate:fresh --seed`; this deletes existing data.
+
+### 6. Start the Application
+
+```bash
+php artisan serve
+```
+
+Open the application:
+
+**http://127.0.0.1:8000**
+
+## Admin Access
+
+| Detail | Value |
+|---|---|
+| Login URL | `http://127.0.0.1:8000/admin/login` |
+| Email | `admin@example.com` |
+| Password | `Admin@12345` |
+
+These are local development credentials. Change the password before production use.
+
+## Application Routes
+
+| Route | Description |
+|---|---|
+| `/` | Public event listing |
+| `/events/{event}/register` | Event registration form |
+| `/registrations/{registration}/success` | Registration confirmation |
+| `/admin/login` | Admin login |
+| `/admin/dashboard` | Admin dashboard |
+| `/admin/events` | Event management |
+| `/admin/registrations` | Registration management |
+
+## Database Structure
+
+| Table | Description |
+|---|---|
+| `users` | Stores user and admin account details |
+| `events` | Stores event information |
+| `registrations` | Stores attendee registration details |
+
+**Database relationship:** One event can have multiple registrations. Each registration belongs to one event through the `event_id` foreign key.
+
+## Laravel Concepts Used
+
+- MVC Architecture
+- Routing and Controllers
+- Blade Templates
+- Eloquent ORM
+- Database Migrations and Seeders
+- Model Relationships
+- Form Validation
+- Authentication and Sessions
+- Middleware
+- CSRF Protection
+
+## Troubleshooting
+
+| Issue | Solution |
+|---|---|
+| PHP or Composer not recognized | Check installation and system PATH. |
+| Missing `vendor` folder | Run `composer install`. |
+| Application key error | Run `php artisan key:generate`. |
+| Database connection error | For SQLite, check that `database/database.sqlite` exists; for MySQL, check the service and `.env` credentials. |
+| Missing database tables | Run `php artisan migrate`. |
+| Admin login fails | Verify admin credentials and `is_admin` value. |
+| Application errors | Check `storage/logs/laravel.log`. |
+
+## Useful Commands
+
+```bash
+# Check Laravel version
+php artisan --version
+
+# View registered routes
+php artisan route:list
+
+# Check migration status
+php artisan migrate:status
+
+# Run tests
+php artisan test
+
+# Clear application caches
+php artisan optimize:clear
+```
